@@ -15,7 +15,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 
 public class DiseaseService {
-    @Autowired
+
     private final DiseaseInfoRepository diseaseInfoRepository;
 
     @Transactional
@@ -26,11 +26,11 @@ public class DiseaseService {
         }
     }
 
-//    @Transactional
-//    public void getInfos(String diseaseName){
-//        DiseaseInfo diseaseInfo = diseaseInfoRepository.findByDiseaseName(diseaseName)
-//                .orElseThrow();
-//
-//    }
+    @Transactional
+    public DiseaseResponse getInfos(String diseaseName){
+        DiseaseInfo diseaseInfo = diseaseInfoRepository.findByDiseaseName(diseaseName)
+                .orElseThrow();
+        return new DiseaseResponse(diseaseInfo.getDescription(), diseaseInfo.getSteps());
+    }
 
 }

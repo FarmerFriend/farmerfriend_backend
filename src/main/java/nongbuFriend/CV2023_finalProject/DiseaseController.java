@@ -30,7 +30,7 @@ import java.util.List;
 public class DiseaseController {
     private static Logger logger = LoggerFactory.getLogger(DiseaseController.class);
 
-//    private final DiseaseService diseaseService;
+    private final DiseaseService diseaseService;
 
     @PostMapping("")
     public String detectDisease(@RequestParam("image") MultipartFile image) {
@@ -57,11 +57,17 @@ public class DiseaseController {
         }
     }
 
-//    @PostMapping("/create")
-//    public String createDiseaseInfos(@RequestBody List<PlantSaveRequest> requestList){
-//        diseaseService.createPlants(requestList);
-//        return "식물 리스트 DB 저장 완료";
-//    }
+    @PostMapping("/create")
+    public String createDiseaseInfos(@RequestBody List<DiseaseInfoSaveRequest> requestList){
+        diseaseService.createPlants(requestList);
+        return "식물 리스트 DB 저장 완료";
+    }
+
+    @GetMapping("/search")
+    public DiseaseResponse getInfos(@RequestParam String diseaseName){
+        return diseaseService.getInfos(diseaseName);
+    }
+
 
     @PostMapping("/tts")
     public ResponseEntity<ByteArrayResource> textToSpeech(@RequestBody String text) throws IOException {
