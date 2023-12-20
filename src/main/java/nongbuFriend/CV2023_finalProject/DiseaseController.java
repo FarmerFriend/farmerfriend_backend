@@ -63,6 +63,7 @@ public class DiseaseController {
         return "식물 리스트 DB 저장 완료";
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/search")
     public DiseaseResponse getInfos(@RequestParam String diseaseName){
         return diseaseService.getInfos(diseaseName);
